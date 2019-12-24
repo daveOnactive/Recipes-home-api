@@ -19,6 +19,16 @@ router.get('/receipe/:id', async (req, res) => {
   }
 });
 
+router.put('/receipe/:id', async (req, res) => {
+  const receipe = new Receipe({});
+  try {
+    const update = await Receipe.updateOne({ _id: req.params.id }, receipe);
+    res.status(200).json(update);
+  } catch(err) {
+    res.status(400).json({ message: err });
+  }
+})
+
 router.delete('/recipe/:id', async (req, res) => {
   try {
     const removeReceipe = await Receipe.remove({ _id: res.params.id });
@@ -29,7 +39,14 @@ router.delete('/recipe/:id', async (req, res) => {
 })
 
 router.post('/receipe', async (req, res) => {
-  res.send('hello word');
+  const receipe = new Receipe({});
+
+  try {
+    const receipeList = await Receipe.save(receipe);
+    res.status(200).json({ data: receipeList });
+  } catch(err) {
+    res.status(400).json({ message: err })
+  }
 });
 
 module.exports = router;
