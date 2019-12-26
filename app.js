@@ -7,12 +7,12 @@ const cors = require('cors');
 const authRoute = require('./routes/auth');
 const receipe = require('./routes/receips');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 dotenv.config();
 
 //connect to DB
-mongoose.connect(process.env.DB_CONNECT,
+mongoose.connect(process.env.DB_CONNECT || process.env.MONGODB_URI,
   { 
     useUnifiedTopology: true,
     useNewUrlParser: true

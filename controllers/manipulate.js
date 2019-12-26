@@ -1,4 +1,6 @@
-export const convertToArray = data => {
-  const result = data.split(',');
+const convertToArray = data => {
+  const result = data.split(',,');
   return result;
 };
+
+module.exports.convertToArray = convertToArray;
