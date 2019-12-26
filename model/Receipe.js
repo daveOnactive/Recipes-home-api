@@ -16,17 +16,17 @@ const receipeSchema = new mongoose.Schema({
     type: [String],
     required: true
   },
-  BeforeYouCook: {
+  beforeYouCook: {
     type: [String],
     required: true
   },
-  CookingDirections: {
+  cookingDirections: {
     type: [String],
     required: true
   },
   tools : {
     type: [String],
-    required: true
+    required: false
   },
   imageUrl: {
     type: String,
