@@ -5,7 +5,7 @@ router.get('/receipe', receipeRoute.getAllReceipe );
 
 router.get('/receipe/:id', receipeRoute.getOneReceipe );
 
-router.put('/receipe/:id', receipeRoute.editReceipe );
+router.patch('/receipe/:id', receipeRoute.editReceipe );
 
 router.delete('/recipe/:id', receipeRoute.deleteReceipe );
 
