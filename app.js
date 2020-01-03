@@ -12,7 +12,7 @@ const port = process.env.PORT || 4000;
 dotenv.config();
 
 //connect to DB
-mongoose.connect(process.env.DB_CONNECT || process.env.MONGODB_URI,
+mongoose.connect(process.env.DB_CONNECT,
   { 
     useUnifiedTopology: true,
     useNewUrlParser: true
