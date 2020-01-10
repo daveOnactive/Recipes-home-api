@@ -55,7 +55,7 @@ exports.userLogin = async (req, res, next) => {
 
   // Create and assign a token
   const token = await jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send(token);
+  res.header('auth-token', token).json({token: token});
   next();
 
 }
