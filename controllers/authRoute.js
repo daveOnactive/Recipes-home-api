@@ -12,7 +12,7 @@ exports.userSignIn = async (req, res, next) => {
   // Check if email already exist
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) {
-    return res.status(400).send('Email already exist in the DB');
+    return res.status(400).json({error: 'Email already exist in the DB'});
   }
 
   // Hashing the password
@@ -30,7 +30,7 @@ exports.userSignIn = async (req, res, next) => {
     res.send({ user: user._id })
     next();
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).json({error: err});
   }
 }
 
@@ -44,13 +44,13 @@ exports.userLogin = async (req, res, next) => {
   //Checking if the email exist
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return res.status(400).send('Email or password is wrong');
+    return res.status(400).json({error: 'Email or password is wrong'});
   }
 
   //Password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) {
-    return res.status(400).send('Invalid password');
+    return res.status(400).json({error: 'Invalid password'});
   }
 
   // Create and assign a token
