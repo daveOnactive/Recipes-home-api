@@ -27,7 +27,7 @@ exports.userSignIn = async (req, res, next) => {
   });
   try {
     const saveUser = await user.save();
-    res.send({ user: user._id })
+    res.json({ user: user._id })
   } catch (err) {
     res.status(400).json({error: err});
   }
