@@ -7,4 +7,7 @@ router.post('/register', authRoute.userSignIn );
 //LOGIN
 router.post('/login', authRoute.userLogin );
 
+// GET SINGLE USER
+router.get('/:id', authRoute.getOneUser);
+
 module.exports = router;
