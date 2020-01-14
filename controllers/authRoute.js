@@ -33,14 +33,6 @@ exports.userSignIn = async (req, res, next) => {
   }
 }
 
-const getID = (data, email) => {
-  data.filter(result => {
-    if(result.email === email) {
-      return result._id;
-    }
-  })
-};
-
 exports.userLogin = async (req, res, next) => {
   // Validate User Details
   const { error } = loginValidation(req.body);
@@ -62,18 +54,17 @@ exports.userLogin = async (req, res, next) => {
 
   // Create and assign a token
   const token = await jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  const allusers = await User.find();
-  res.header('auth-token', token).json({userId: getID(allUsers, req.body.email),token: token});
+  res.header('auth-token', token).json({userId: user._id, token: token});
   next();
 
 };
 
-exports.getOneUser = async (res, req, next) => {
+exports.getOneUser = async (req, res, next) => {
   try { 
     const user = await User.findById(req.params.id);
     res.json(user);
     next();
   } catch(err) {
-    // res.status(400).json({ message: err });
+    res.status(400).json({ message: err });
   }
 };
