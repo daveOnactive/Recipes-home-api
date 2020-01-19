@@ -5,13 +5,13 @@ const { receipeValidation } = require('./validation');
 exports.addReceipe = async (req, res, next) => {
   const { error } = receipeValidation(req.body);
   if(error) {
-    return res.status(400).send(error.details[0].message);
+    return res.status(400).json({error: error.details[0].message});
   }
 
   // check if title already exist
   const titleExist = await Receipe.findOne({ title: req.body.title });
   if(titleExist) {
-    return res.status(400).send('Receipe already exist in the DB');
+    return res.status(400).json({error : 'Receipe already exist in the DB'});
   }
 
   const receipe = new Receipe({
